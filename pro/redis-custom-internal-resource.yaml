@@ -1,0 +1,52 @@
+### new Redis PRO ####
+kind: Kubernetes/Resource
+name: redis-pro
+spec:
+  kind: StatefulSet
+  api_version: apps/v1
+  contents:
+    spec:
+      serviceName: redis-pro
+      replicas: 1
+      selector:
+        matchLabels:
+          role: db
+          application: redis-pro
+      updateStrategy:
+        type: RollingUpdate
+      template:
+        metadata:
+          labels:
+            role: db
+            application: redis-pro
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+            - name: pacman-redis
+              image: my-custom-repo/redis:6.2.11-alpine
+              imagePullPolicy: Always
+              ports:
+                - containerPort: 6379
+                  name: redis
+              resources:
+                limits:
+                  cpu: 1
+                  memory: 768Mi
+                requests:
+                  cpu: 250m
+                  memory: 768Mi
+              volumeMounts:
+                - name: data
+                  mountPath: /data
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          securityContext:
+            fsGroup: 999
+            runAsUser: 999
+          volumes:
+            - emptyDir: {}
+              name: data
+
+
+

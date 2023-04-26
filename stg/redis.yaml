@@ -1,0 +1,44 @@
+### Redis TST ####
+kind: StatefulSet
+api_version: apps/v1
+contents:
+  spec:
+    serviceName: redis-stg
+    replicas: 1
+    selector:
+      matchLabels:
+        role: db
+        application: redis-stg
+    updateStrategy:
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          role: db
+          application: redis-stg
+      spec:
+        containers:
+          - name: redis
+            image: redis:7.0.0-alpine
+            imagePullPolicy: IfNotPresent
+            ports:
+              - containerPort: 6379
+                name: redis
+            resources:
+              limits:
+                cpu: 1
+                memory: 768Mi
+              requests:
+                cpu: 250m
+                memory: 768Mi
+            volumeMounts:
+              - name: data
+                mountPath: /data
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+        securityContext:
+          fsGroup: 999
+          runAsUser: 999
+        volumes:
+          - emptyDir: {}
+            name: data
