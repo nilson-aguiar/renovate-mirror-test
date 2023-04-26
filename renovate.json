@@ -1,0 +1,32 @@
+{
+  "enabledManagers": ["regex"],
+  "packageRules": [
+    {
+      "description": "official images",
+      "matchDatasources": ["docker"],
+      "matchPackagePatterns": ["^[a-z-]+$"],
+      "replacementNameTemplate": "library/{{{packageName}}}"
+    },
+    {
+      "description": "Configures that the Google docker repository is used for Docker image lookup",
+      "matchDatasources": [
+        "docker"
+      ],
+      "registryUrls": [
+        "https://mirror.gcr.io"
+      ]
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^(stg|pro)/.*\\.yaml$"
+      ],
+      "matchStringsStrategy": "recursive",
+      "matchStrings": [
+        "\\s*image: (?<depName>.*?):(?<currentValue>.*)\\s*"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
+}
