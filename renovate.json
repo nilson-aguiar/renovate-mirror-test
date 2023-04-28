@@ -1,6 +1,19 @@
 {
   "platform": "github",
   "enabledManagers": ["regex"],
+  "extends": [
+    ":dependencyDashboard",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    ":prConcurrentLimit20",
+    ":rebaseStalePrs",
+    "group:monorepos",
+    "group:recommended",
+    "workarounds:all"
+  ],
+  "commitMessagePrefix": "[RENOVATE]",
+  "labels": ["Renovate"],
   "packageRules": [
     {
       "description": "official images",
