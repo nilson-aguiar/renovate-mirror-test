@@ -8,12 +8,6 @@
       "replacementNameTemplate": "library/{{{packageName}}}"
     },
     {
-      "description": "non-official images",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["^[a-z-]+/[a-z-]+$"],
-      "replacementNameTemplate": "some.registry.org/{{{packageName}}}"
-    },
-    {
       "description": "Configures that the Google docker repository is used for Docker image lookup",
       "matchDatasources": [
         "docker"
