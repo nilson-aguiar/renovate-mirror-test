@@ -1,4 +1,5 @@
 {
+  "platform": "github",
   "enabledManagers": ["regex"],
   "packageRules": [
     {
