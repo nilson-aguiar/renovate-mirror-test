@@ -24,7 +24,7 @@ spec:
         spec:
           containers:
             - name: pacman-redis
-              image: my-custom-repo/redis:6.2.11-alpine
+              image: ghcr.io/nilson-aguiar/test-container-registry:v6.2.11
               imagePullPolicy: Always
               ports:
                 - containerPort: 6379
