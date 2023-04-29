@@ -24,7 +24,7 @@ spec:
         spec:
           containers:
             - name: pacman-redis
-              image: ghcr.io/nilson-aguiar/test-container-registry:v6.2.11
+              image: ghcr.io/nilson-aguiar/test-container-registry:v6.2.12
               imagePullPolicy: Always
               ports:
                 - containerPort: 6379
