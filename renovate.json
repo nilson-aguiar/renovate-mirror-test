@@ -1,0 +1,38 @@
+{
+  "platform": "github",
+  "enabledManagers": ["regex"],
+  "extends": [
+    ":dependencyDashboard"
+  ],
+  "commitMessagePrefix": "[RENOVATE]",
+  "labels": ["Renovate"],
+  "packageRules": [
+    {
+      "description": "official images",
+      "matchDatasources": ["docker"],
+      "matchPackagePatterns": ["^[a-z-]+$"],
+      "replacementNameTemplate": "mirror.gcr.io/library/{{{packageName}}}"
+    },
+    {
+      "description": "Configures that the Google docker repository is used for Docker image lookup",
+      "matchDatasources": [
+        "docker"
+      ],
+      "registryUrls": [
+        "https://mirror.gcr.io"
+      ]
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^(pro|stg)/.*\\.yaml$"
+      ],
+      "matchStringsStrategy": "recursive",
+      "matchStrings": [
+        "\\s*image: (?<depName>.*?):(?<currentValue>.*)\\s*"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
+}
